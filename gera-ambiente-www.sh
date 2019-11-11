@@ -1,14 +1,19 @@
 #!/bin/bash
-# gera um container com nginx e libera acesso para a porta 8080
-#  
+# gera dois container com nginx e libera acesso para a porta 8081 e 8082
+#
+#echo "Criando redes"
+#lxc network create redeWWW ipv4.address=10.10.80.1/27 ipv4.nat=false ipv4.dhcp=false
+
 echo "Criando o container www1 e www2"
 lxc copy debian9padrao www1
 lxc copy debian9padrao www2
 
+#echo "Ligando interface eth0 na rede interna"
+#lxc network attach redeWWW www1 eth0
+#lxc network attach redeWWW www2 eth0
+
 echo "Copiando configuracao de rede www1 e www2"
 lxc file push ./conf/www1/interfaces www1/etc/network/interfaces
-
-echo "Copiando configuracao de rede"
 lxc file push ./conf/www2/interfaces www2/etc/network/interfaces
 
 echo "Iniciando container"
