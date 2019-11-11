@@ -7,4 +7,4 @@ iface lo inet loopback
 
 auto eth0
 iface eth0 inet static
-	address 10.0.80.80/27
+	address 10.0.80.82/27

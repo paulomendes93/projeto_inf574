@@ -1,29 +1,40 @@
 #!/bin/bash
-# gera um container com www1 e libera acesso para a porta 8080
+# gera um container com nginx e libera acesso para a porta 8080
 #  
-echo "Criando o container www1"
+echo "Criando o container www1 e www2"
 lxc copy debian9padrao www1
+lxc copy debian9padrao www2
+
+echo "Copiando configuracao de rede www1 e www2"
+lxc file push ./conf/www1/interfaces www1/etc/network/interfaces
 
 echo "Copiando configuracao de rede"
-lxc file push ./conf/www1/interfaces www1/etc/network/interfaces
+lxc file push ./conf/www2/interfaces www2/etc/network/interfaces
 
 echo "Iniciando container"
 lxc start www1
+lxc start www2
 
 echo "Aguardando 5 segundos para inicialização"
 sleep 5
 
-### www1
-echo "Instalando e configurando www1"
-lxc exec www1 -- apt update
-lxc exec www1 -- apt upgrade -y
-lxc exec www1 -- apt install -y www1
-echo "Apagando arquivo index.html em www1"
-lxc file delete $1/var/www/html/index.html
-echo "Copiando arquivos exemplo para www1"
-lxc file push ./conf/www1/index.php $1/var/www/html/index.php
-lxc file push ./conf/www1/1.php $1/var/www/html/1.php
+### NGINX
+for maq in www1 www2
+do
+	echo "Instalando e configurando $maq"
+	lxc exec $maq -- apt update
+	lxc exec $maq -- apt upgrade -y
+	lxc exec $maq -- apt install -y nginx
+	
+	echo "Apagando arquivo index.html em $maq"
+	lxc file delete $maq/var/www/html/index.html
+	
+	echo "Copiando arquivos exemplo para $maq"
+	lxc file push ./conf/exemplos/index.php $maq/var/www/html/index.php
+	lxc file push ./conf/exemplos/1.php $maq/var/www/html/1.php
+done
 
 ###
-# redirecionando a porta 8080 para o servidor na porta 80 no container www1
-lxc config device add www1 myport8080 proxy listen=tcp:0.0.0.0:8080 connect=tcp:0.0.0.0:80
+# redirecionando a porta 8080 para o servidor na porta 80 no container nginx
+lxc config device add www1 myport8081 proxy listen=tcp:0.0.0.0:8081 connect=tcp:0.0.0.0:80
+lxc config device add www2 myport8082 proxy listen=tcp:0.0.0.0:8082 connect=tcp:0.0.0.0:80
