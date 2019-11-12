@@ -13,15 +13,18 @@ iface eth0 inet static
 
 auto eth1
 iface eth1 inet static
-	address 10.0.0.2/27
+	address 10.0.0.2
+	netmask 255.255.255.224
 	gateway 10.19.70.1
 
 auto eth2
 iface eth2 inet static
-	address 192.168.0.2/27
+	address 192.168.0.2
+	netmask 255.255.255.224
 	gateway 10.19.70.1
 	
 auto eth3
 iface eth3 inet static
-	address 172.16.0.2/27
+	address 172.16.0.2
+	netmask 255.255.255.224
 	gateway 10.19.70.1

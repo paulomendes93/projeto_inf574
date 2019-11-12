@@ -3,9 +3,9 @@
 #
 #
 echo "Criando redes "
-lxc network create redeFW_WEB ipv4.address=10.0.0.1/27 ipv4.nat=false ipv4.dhcp=false
-lxc network create redeFW_SERVERS ipv4.address=192.168.0.1/27 ipv4.nat=false ipv4.dhcp=false
-lxc network create redeFW_DMZ ipv4.address=172.16.0.1/27 ipv4.nat=false ipv4.dhcp=false
+lxc network create redeFW_WEB ipv4.address=10.0.0.1/27 ipv4.nat=true ipv4.dhcp=false
+lxc network create redeFW_SERVERS ipv4.address=192.168.0.1/27 ipv4.nat=true ipv4.dhcp=false
+lxc network create redeFW_DMZ ipv4.address=172.16.0.1/27 ipv4.nat=true ipv4.dhcp=false
 
 ### R
 echo "Criando roteador R"
