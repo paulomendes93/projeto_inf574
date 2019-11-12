@@ -7,5 +7,18 @@ iface lo inet loopback
 
 auto eth0
 iface eth0 inet static
-	address 10.10.0.10/27
-	gateway 10.0.0.1
+	address 10.19.70.2
+	netmask 255.255.255.0
+	gateway 10.19.70.1
+
+auto eth1
+iface eth1 inet static
+	address 10.0.0.2/27
+
+auto eth2
+iface eth2 inet static
+	address 192.168.0.2/27
+	
+auto eth3
+iface eth3 inet static
+	address 172.16.0.2/27
