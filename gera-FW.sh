@@ -3,9 +3,9 @@
 #
 #
 echo "Criando redes "
-lxc network create redeFW_WEB ipv4.address=10.0.0.100/25 ipv4.nat=true ipv4.dhcp=false
-lxc network create redeFW_SERVERS ipv4.address=172.16.0.100/25 ipv4.nat=true ipv4.dhcp=false
-lxc network create redeFW_DMZ ipv4.address=192.168.0.100/25 ipv4.nat=true ipv4.dhcp=false
+lxc network create redeFW_WEB ipv4.address=10.0.0.100/24 ipv4.nat=true ipv4.dhcp=false
+lxc network create redeFW_SERVERS ipv4.address=172.16.0.100/24 ipv4.nat=true ipv4.dhcp=false
+lxc network create redeFW_DMZ ipv4.address=192.168.0.100/24 ipv4.nat=true ipv4.dhcp=false
 
 ### R
 echo "Criando roteador R"
@@ -27,3 +27,5 @@ lxc start R
 
 echo "Aguardando 10 segundos para garantir que R esta no ar"
 sleep 10
+
+echo "Configurando rotas (em teste)"
