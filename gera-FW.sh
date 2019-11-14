@@ -3,39 +3,39 @@
 #
 #
 echo "Criando redes "
-lxc network create redeR_GW ipv4.address=10.19.70.100/24 ipv4.nat=true ipv4.dhcp=false
-lxc network create redeFW_EXT_DMZ ipv4.address=192.168.0.100/24 ipv4.nat=true ipv4.dhcp=false
-lxc network create redeFW_INT_SRV ipv4.address=10.10.10.100/24 ipv4.nat=true ipv4.dhcp=false
+lxc network create redeRGW ipv4.address=10.19.70.100/24 ipv4.nat=true ipv4.dhcp=false
+lxc network create redeFWEXTDMZ ipv4.address=192.168.0.100/24 ipv4.nat=true ipv4.dhcp=false
+lxc network create redeFWINTSRV ipv4.address=10.10.10.100/24 ipv4.nat=true ipv4.dhcp=false
 
-### FW_EXT
-echo "Criando FW_EXT"
-lxc copy debian9padrao FW_EXT
-
-echo "Copiando configuracoes"
-lxc file push ./conf/FW_EXT/interfaces FW_EXT/etc/network/interfaces 
-lxc file push ./conf/FW_EXT/sysctl.conf FW_EXT/etc/sysctl.conf
-lxc file push ./conf/FW_EXT/rc.local FW_EXT/etc/rc.local
-
-echo "Ligando interfaces FW_EXT"
-lxc network attach redeR_WEB FW_EXT eth0
-lxc network attach redeFW_EXT_DMZ FW_EXT eth1
-
-### FW_INT
-echo "Criando FW_INT"
-lxc copy debian9padrao FW_INT
+### FWEXT
+echo "Criando FWEXT"
+lxc copy debian9padrao FWEXT
 
 echo "Copiando configuracoes"
-lxc file push ./conf/FW_INT/interfaces FW_INT/etc/network/interfaces 
-lxc file push ./conf/FW_INT/sysctl.conf FW_INT/etc/sysctl.conf
-lxc file push ./conf/FW_INT/rc.local FW_INT/etc/rc.local
+lxc file push ./conf/FWEXT/interfaces FWEXT/etc/network/interfaces 
+lxc file push ./conf/FWEXT/sysctl.conf FWEXT/etc/sysctl.conf
+lxc file push ./conf/FWEXT/rc.local FWEXT/etc/rc.local
 
-echo "Ligando interfaces FW_INT"
-lxc network attach redeFW_EXT_DMZ FW_INT eth0
-lxc network attach redeFW_INT_SRV FW_INT eth1
+echo "Ligando interfaces FWEXT"
+lxc network attach redeR_WEB FWEXT eth0
+lxc network attach redeFWEXTDMZ FWEXT eth1
+
+### FWINT
+echo "Criando FWINT"
+lxc copy debian9padrao FWINT
+
+echo "Copiando configuracoes"
+lxc file push ./conf/FWINT/interfaces FWINT/etc/network/interfaces 
+lxc file push ./conf/FWINT/sysctl.conf FWINT/etc/sysctl.conf
+lxc file push ./conf/FWINT/rc.local FWINT/etc/rc.local
+
+echo "Ligando interfaces FWINT"
+lxc network attach redeFWEXTDMZ FWINT eth0
+lxc network attach redeFWINTSRV FWINT eth1
 
 echo "Iniciando containers"
-lxc start FW_EXT
-lxc start FW_INT
+lxc start FWEXT
+lxc start FWINT
 
 echo "Aguardando 10 segundos para garantir que R esta no ar"
 sleep 10
