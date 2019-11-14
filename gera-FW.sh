@@ -3,7 +3,7 @@
 #
 #
 echo "Criando redes "
-lxc network create redeRGW ipv4.address=10.19.70.100/24 ipv4.nat=true ipv4.dhcp=false
+lxc network create redeFWEXTGW ipv4.address=10.19.70.100/24 ipv4.nat=true ipv4.dhcp=false
 lxc network create redeFWEXTDMZ ipv4.address=192.168.0.100/24 ipv4.nat=true ipv4.dhcp=false
 lxc network create redeFWINTSRV ipv4.address=10.10.10.100/24 ipv4.nat=true ipv4.dhcp=false
 
@@ -17,7 +17,7 @@ lxc file push ./conf/FWEXT/sysctl.conf FWEXT/etc/sysctl.conf
 lxc file push ./conf/FWEXT/rc.local FWEXT/etc/rc.local
 
 echo "Ligando interfaces FWEXT"
-lxc network attach redeR_WEB FWEXT eth0
+lxc network attach redeFWEXTGW FWEXT eth0
 lxc network attach redeFWEXTDMZ FWEXT eth1
 
 ### FWINT
