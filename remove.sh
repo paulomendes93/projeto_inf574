@@ -2,8 +2,8 @@
 # remove o primeiro ambiente:
 # as duas maquinas e a rede
 echo "Parando a maquinas"
-lxc exec FW_EXT -- /sbin/poweroff
-lxc exec FW_INT -- /sbin/poweroff
+lxc exec FWEXT -- /sbin/poweroff
+lxc exec FWINT -- /sbin/poweroff
 lxc exec www1 -- /sbin/poweroff
 lxc exec www2 -- /sbin/poweroff
 
@@ -11,16 +11,16 @@ echo "Aguardando 5 segundos para remover"
 sleep 5
 
 echo "Removendo maquinas"
-lxc delete FW_EXT
-lxc delete FW_INT
+lxc delete FWEXT
+lxc delete FWINT
 lxc delete www1
 lxc delete www2
 
 
 echo "Removendo as  redes"
-lxc network delete redeR_GW
-lxc network delete redeFW_EXT_DMZ
-lxc network delete redeFW_INT_SRV
+lxc network delete redeFWEXTGW 
+lxc network delete redeFWEXTDMZ
+lxc network delete redeFWINTSRV
 
 
 echo "Removendo a o redirecionamento"
