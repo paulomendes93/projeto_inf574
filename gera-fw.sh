@@ -3,8 +3,8 @@
 #
 #
 echo "Criando redes "
-lxc network create redeFWEXTDMZ ipv4.address=192.168.0.100/24 ipv4.nat=true ipv4.dhcp=false ipv6.address=no
-lxc network create redeFWINTSRV ipv4.address=10.10.10.100/24 ipv4.nat=true ipv4.dhcp=false ipv6.address=no
+lxc network create redeFWEXTDMZ ipv4.address=192.168.0.100/24 ipv4.nat=true ipv4.dhcp=false
+lxc network create redeFWINTSRV ipv4.address=10.10.10.100/24 ipv4.nat=true ipv4.dhcp=false
 
 
 ### FWEXT
