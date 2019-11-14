@@ -24,7 +24,7 @@ echo "Ligando interface eth0 na rede interna"
 lxc network attach redeFWINTSRV syslog eth0
 lxc network attach redeFWINTSRV zabbix eth0
 
-echo "Copiando configuracao de rede www1 e www2"
+echo "Copiando configuracao de rede syslog e zabbix"
 lxc file push ./conf/syslog/interfaces syslog/etc/network/interfaces
 lxc file push ./conf/zabbix/interfaces zabbix/etc/network/interfaces
 
@@ -35,13 +35,12 @@ lxc copy debian9padrao ssh
 lxc copy debian9padrao proxy
 
 echo "Ligando interface eth0 na rede interna"
-lxc network attach redeFWINTDMZ ssh eth0
-lxc network attach redeFWINTDMZ proxy eth0
+lxc network attach redeFWEXTDMZ ssh eth0
+lxc network attach redeFWEXTDMZ proxy eth0
 
 echo "Copiando configuracao de rede ssh e proxy"
 lxc file push ./conf/ssh/interfaces ssh/etc/network/interfaces
 lxc file push ./conf/proxy/interfaces proxy/etc/network/interfaces
-
 
 
 echo "Iniciando containers"
