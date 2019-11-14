@@ -6,8 +6,8 @@ lxc copy debian9padrao www1
 lxc copy debian9padrao www2
 
 echo "Ligando interface eth0 na rede interna"
-lxc network attach redeFW_WEB www1 eth0
-lxc network attach redeFW_WEB www2 eth0
+lxc network attach redeFW_INT_SRV www1 eth0
+lxc network attach redeFW_INT_SRV  www2 eth0
 
 echo "Copiando configuracao de rede www1 e www2"
 lxc file push ./conf/www1/interfaces www1/etc/network/interfaces
