@@ -13,4 +13,4 @@ iface eth0 inet static
 auto eth1
 iface eth1 inet static
 	address 192.168.0.1/24
-	gateway 10.19.70.1
+	gateway 10.19.70.2
