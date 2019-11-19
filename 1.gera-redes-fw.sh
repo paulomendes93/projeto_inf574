@@ -3,41 +3,30 @@
 #
 #
 echo "Criando redes "
-lxc network create redeFWEXTDMZ ipv4.address=192.168.0.100/24 ipv4.nat=false ipv4.dhcp=false
-lxc network create redeFWINTSRV ipv4.address=10.10.10.100/24 ipv4.nat=false ipv4.dhcp=false
+lxc network create redeFWDMZ ipv4.address=192.168.0.100/24 ipv4.nat=false ipv4.dhcp=false
+lxc network create redeFWSRV ipv4.address=10.10.10.100/24 ipv4.nat=false ipv4.dhcp=false
 
-
-### FWEXT
-echo "Criando FWEXT"
-lxc copy debian9padrao FWEXT
-
-echo "Copiando configuracoes"
-lxc file push ./conf/FWEXT/interfaces FWEXT/etc/network/interfaces 
-lxc file push ./conf/FWEXT/sysctl.conf FWEXT/etc/sysctl.conf
-lxc file push ./conf/FWEXT/rc.local FWEXT/etc/rc.local
-
-echo "Ligando interfaces FWEXT"
-lxc network attach lxdbr0 FWEXT eth0
-lxc network attach redeFWEXTDMZ FWEXT eth1
-
-
-### FWINT
-echo "Criando FWINT"
-lxc copy debian9padrao FWINT
+### firewall
+echo "Criando firewall"
+lxc copy debian9padrao firewall
 
 echo "Copiando configuracoes"
-lxc file push ./conf/FWINT/interfaces FWINT/etc/network/interfaces 
-lxc file push ./conf/FWINT/sysctl.conf FWINT/etc/sysctl.conf
-lxc file push ./conf/FWINT/rc.local FWINT/etc/rc.local
+lxc file push ./conf/firewall/interfaces firewall/etc/network/interfaces 
+lxc file push ./conf/firewall/sysctl.conf firewall/etc/sysctl.conf
+lxc file push ./conf/firewall/rc.local firewall/etc/rc.local
+lxc file push ./conf/firewall/sshd_config firewall/etc/ssh/sshd_config
 
-echo "Ligando interfaces FWINT"
-lxc network attach redeFWEXTDMZ FWINT eth0
-lxc network attach redeFWINTSRV FWINT eth1
+echo "Ligando interfaces firewall"
+lxc network attach lxdbr0 firewall eth0
+lxc network attach redeFWDMZ firewall eth1
+lxc network attach redeFWDSRV firewall eth2
 
-
+### Iniciando
 echo "Iniciando containers"
-lxc start FWEXT
-lxc start FWINT
+lxc start firewall
 
-echo "Aguardando 10 segundos para garantir que R esta no ar"
+echo "Aguardando 10 segundos para garantir que firewall esta no ar"
 sleep 10
+
+echo "Setando NAT entre redeDWDMZ e eth0"
+lxc exec firewall -- iptables -t nat -A POSTROUTING --source 192.168.0.0/24 --out-interface eth0 -j MASQUERADE

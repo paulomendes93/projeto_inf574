@@ -8,4 +8,4 @@ iface lo inet loopback
 auto eth0
 iface eth0 inet static
 	address 192.168.0.103/24
-	gateway 192.168.0.1
+	gateway 10.19.70.101
