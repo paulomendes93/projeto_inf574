@@ -19,7 +19,7 @@ lxc file push ./conf/firewall/sshd_config firewall/etc/ssh/sshd_config
 echo "Ligando interfaces firewall"
 lxc network attach lxdbr0 firewall eth0
 lxc network attach redeFWDMZ firewall eth1
-lxc network attach redeFWDSRV firewall eth2
+lxc network attach redeFWSRV firewall eth2
 
 ### Iniciando
 echo "Iniciando containers"
