@@ -22,10 +22,10 @@
 
 upstream load_balancer {
     # WWW1 Web Server
-    server 172.0.30.10;
+    server 10.10.10.10;
 
     # WWW2 Web Server
-    server 172.0.30.20;
+    server 10.10.10.11;
 }
 
 server {
@@ -33,14 +33,8 @@ server {
 	# Server Name
     server_name proxy;
 
-    # Listen port 443 using HTTPS Protocol
-    listen 443 ssl;
-
-    # SSL CA Certificate
-    ssl_certificate /etc/nginx/ssl/proxy_nginx.crt;
-
-    # SSL Key
-    ssl_certificate_key /etc/nginx/ssl/proxy_nginx.key;
+    # Listen port 80 using HTTP Protocol
+    listen 80;
 
     # Load Balancer using 'load_balancer' upstream
     location / {
@@ -54,21 +48,21 @@ server {
 
     # Reverse proxy for WWW1 Web Server
     location /www1 {
-        proxy_pass http://172.0.30.10/;
+        proxy_pass http://10.10.10.10/;
     }
 
     # Reverse proxy for WWW2 Web Server
     location /www2 {
-        proxy_pass http://172.0.30.20/;
+        proxy_pass http://10.10.10.11/;
     }
 
     # Reverse proxy for Loganalyzer Server
     location /log {
-        proxy_pass http://172.0.20.10/loganalyzer;
+        proxy_pass http://10.10.10.12/loganalyzer;
     }
 
     # Reverse proxy for Zabbix Server
-    location /gerencia {
-        proxy_pass http://172.0.20.20/zabbix;
+    location /zabbix {
+        proxy_pass http://10.10.10.13/zabbix;
     }
 }

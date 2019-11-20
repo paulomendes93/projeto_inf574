@@ -7,7 +7,7 @@ lxc exec ssh -- /sbin/poweroff
 lxc exec proxy -- /sbin/poweroff
 lxc exec www1 -- /sbin/poweroff
 lxc exec www2 -- /sbin/poweroff
-lxc exec syslog -- /sbin/poweroff
+lxc exec log -- /sbin/poweroff
 lxc exec zabbix -- /sbin/poweroff
 
 
@@ -20,7 +20,7 @@ lxc delete ssh
 lxc delete proxy
 lxc delete www1
 lxc delete www2
-lxc delete syslog
+lxc delete log
 lxc delete zabbix
 
 echo "Removendo as redes"

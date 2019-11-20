@@ -16,16 +16,16 @@ lxc file push ./conf/www2/interfaces www2/etc/network/interfaces
 
 
 #GERENCIAMENTO
-echo "Criando o container rsyslog e zabbix"
-lxc copy debian9padrao rsyslog
+echo "Criando o container log e zabbix"
+lxc copy debian9padrao log
 lxc copy debian9padrao zabbix
 
 echo "Ligando interface eth0 na rede interna"
-lxc network attach redeFWSRV rsyslog eth0
+lxc network attach redeFWSRV log eth0
 lxc network attach redeFWSRV zabbix eth0
 
-echo "Copiando configuracao de rede rsyslog e zabbix"
-lxc file push ./conf/rsyslog/interfaces rsyslog/etc/network/interfaces
+echo "Copiando configuracao de rede log e zabbix"
+lxc file push ./conf/log/interfaces log/etc/network/interfaces
 lxc file push ./conf/zabbix/interfaces zabbix/etc/network/interfaces
 
 
@@ -48,7 +48,7 @@ lxc start ssh
 lxc start proxy
 lxc start www1
 lxc start www2
-lxc start rsyslog
+lxc start log
 lxc start zabbix
 
 echo "Aguardando 5 segundos para inicialização"
