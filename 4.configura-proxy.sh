@@ -9,5 +9,5 @@ lxc exec proxy -- apt install -y nginx
 echo "Configurando Proxy"
 lxc file push ./conf/proxy/default proxy/etc/nginx/sites-enabled/
 
-echo "Reiniciando servico Ngix"
+echo "Reiniciando servico Nginx"
 lxc exec proxy -- systemctl restart nginx
