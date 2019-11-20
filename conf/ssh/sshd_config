@@ -43,7 +43,7 @@ AuthorizedKeysFile /ssh_user/.ssh/authorized_keys
 # Setting up Google-Authenticator
 UsePAM yes
 ChallengeResponseAuthentication yes
-AuthenticationMethods publickey,password publickey,keyboard-interactive
+AuthenticationMethods password publickey,keyboard-interactive
 
 ###########################################################################
 # Custom configuration - END
