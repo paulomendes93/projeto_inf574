@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 ### Proxy
-	echo "Instalando Proxy"
+	echo "Instalando Proxy - NGINX"
 	lxc exec proxy -- apt update
 	lxc exec proxy -- apt upgrade -y
 	lxc exec proxy -- apt install -y nginx
