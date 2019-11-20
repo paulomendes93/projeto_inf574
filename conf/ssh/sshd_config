@@ -10,7 +10,45 @@
 # possible, but leave them commented.  Uncommented options override the
 # default value.
 
-#Port 22
+###########################################################################
+# Custom configuration - START
+###########################################################################
+
+# Enabling only Protocol 2
+Protocol 2
+
+# Disabling Root Login
+PermitRootLogin no
+
+# Setting up client sessions
+ClientAliveInterval 300
+ClientAliveCountMax 3
+
+Port 22
+
+# Disabling password authentication
+PasswordAuthentication no
+
+# Disabling X11
+X11Forwarding no
+
+# Allowed users
+AllowUsers ssh_user
+
+# Key authentication
+RSAAuthentication yes
+PubkeyAuthentication yes
+AuthorizedKeysFile /ssh_user/.ssh/authorized_keys
+
+# Setting up Google-Authenticator
+UsePAM yes
+ChallengeResponseAuthentication yes
+AuthenticationMethods publickey,password publickey,keyboard-interactive
+
+###########################################################################
+# Custom configuration - END
+###########################################################################
+
 #AddressFamily any
 #ListenAddress 0.0.0.0
 #ListenAddress ::
@@ -29,7 +67,6 @@
 # Authentication:
 
 #LoginGraceTime 2m
-#PermitRootLogin prohibit-password
 #StrictModes yes
 #MaxAuthTries 6
 #MaxSessions 10
@@ -56,10 +93,6 @@
 #PasswordAuthentication yes
 #PermitEmptyPasswords no
 
-# Change to yes to enable challenge-response passwords (beware issues with
-# some PAM modules and threads)
-ChallengeResponseAuthentication yes
-
 # Kerberos options
 #KerberosAuthentication no
 #KerberosOrLocalPasswd yes
@@ -72,21 +105,9 @@ ChallengeResponseAuthentication yes
 #GSSAPIStrictAcceptorCheck yes
 #GSSAPIKeyExchange no
 
-# Set this to 'yes' to enable PAM authentication, account processing,
-# and session processing. If this is enabled, PAM authentication will
-# be allowed through the ChallengeResponseAuthentication and
-# PasswordAuthentication.  Depending on your PAM configuration,
-# PAM authentication via ChallengeResponseAuthentication may bypass
-# the setting of "PermitRootLogin without-password".
-# If you just want the PAM account and session checks to run without
-# PAM authentication, then enable this but set PasswordAuthentication
-# and ChallengeResponseAuthentication to 'no'.
-UsePAM yes
-
 #AllowAgentForwarding yes
 #AllowTcpForwarding yes
 #GatewayPorts no
-X11Forwarding yes
 #X11DisplayOffset 10
 #X11UseLocalhost yes
 #PermitTTY yes
@@ -97,8 +118,6 @@ PrintMotd no
 #UsePrivilegeSeparation sandbox
 #PermitUserEnvironment no
 #Compression delayed
-#ClientAliveInterval 0
-#ClientAliveCountMax 3
 #UseDNS no
 #PidFile /var/run/sshd.pid
 #MaxStartups 10:30:100
