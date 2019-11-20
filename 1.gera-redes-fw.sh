@@ -1,5 +1,5 @@
 #!/bin/bash
-# gera o Bridges e Firewall
+# gera redes "Bridge" e Firewall
 #
 #
 echo "Criando redes "

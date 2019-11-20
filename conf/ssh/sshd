@@ -54,4 +54,5 @@ session [success=ok ignore=ignore module_unknown=ignore default=bad]        pam_
 # Standard Un*x password updating.
 @include common-password
 
+# Enabling 2 factors authentication
 auth required pam_google_authenticator.so
