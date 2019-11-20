@@ -2,7 +2,7 @@
 # remove o primeiro ambiente:
 # as duas maquinas e a rede
 echo "Parando as maquinas"
-lxc exec firewall-- /sbin/poweroff
+lxc exec firewall -- /sbin/poweroff
 lxc exec ssh -- /sbin/poweroff
 lxc exec proxy -- /sbin/poweroff
 lxc exec www1 -- /sbin/poweroff
@@ -15,8 +15,7 @@ echo "Aguardando 5 segundos para remover"
 sleep 5
 
 echo "Removendo maquinas"
-lxc delete FWEXT
-lxc delete FWINT
+lxc delete firewall
 lxc delete ssh
 lxc delete proxy
 lxc delete www1
