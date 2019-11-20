@@ -8,5 +8,7 @@ do
 	lxc exec $maq -- apt update
 	lxc exec $maq -- apt upgrade -y
 	lxc exec $maq -- apt install -y nginx
-	lxc file push ./conf/$maq/index.html $maq/usr/share/nginx/html/index.html
+	
+	echo "Alterando aquivo index.html em $maq"
+	lxc file push ./conf/$maq/index.nginx-debian.html $maq/var/www/html/index.nginx-debian.
 done
