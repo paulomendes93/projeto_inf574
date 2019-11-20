@@ -8,4 +8,7 @@
 	
 	echo "Configurando Proxy"
 	lxc file push ./conf/proxy/default proxy/etc/nginx/sites-enabled/
+	
+	echo "reiniciando servico Ngix"
+	lxc exec proxy -- systemctl restart nginx
 done
