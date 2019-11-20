@@ -8,9 +8,12 @@ do
     lxc exec $maq -- /usr/bin/apt install -y wget
 
     echo "Adicionando repositorio zabbix 4.4 no container " $maq
-    lxc exec $maq --  wget https://repo.zabbix.com/zabbix/4.4/debian/pool/main/z/zabbix-release/zabbix-release_4.4-1+stretch_all.deb
-    lxc exec $maq --  dpkg -i zabbix-release_4.4-1+stretch_all.deb
-    lxc exec $maq -- rm zabbix-release_4.4-1+stretch_all.deb
+    #lxc exec $maq -- wget https://repo.zabbix.com/zabbix/4.4/debian/pool/main/z/zabbix-release/zabbix-release_4.4-1+stretch_all.deb
+	lxc file push ./conf/zabbix/zabbix-release_4.4-1+stretch_all.deb $maq/tmp/
+	#lxc exec $maq -- dpkg -i zabbix-release_4.4-1+stretch_all.deb
+	lxc exec $maq -- dpkg -i /tmp/zabbix-release_4.4-1+stretch_all.deb
+
+    #lxc exec $maq -- rm zabbix-release_4.4-1+stretch_all.deb
     lxc exec $maq -- /usr/bin/apt update
 
     echo "Instalando agente zabbix no container " $maq
