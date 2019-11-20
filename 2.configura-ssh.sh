@@ -10,5 +10,3 @@ lxc file push conf/ssh/sshd 		ssh/etc/pam.d/sshd -p --uid 0 --gid 0 --mode 0644
 
 echo "Reiniciando sshd"
 lxc exec ssh -- service sshd restart
-
-echo "fim"
