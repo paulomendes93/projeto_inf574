@@ -1,6 +1,6 @@
 #!/bin/bash
 # instala o agente zabbix  nas maquinas 
-for maq in FWEXT ssh proxy FWINT www1 www2 syslog
+for maq in firewall ssh proxy www1 www2 zabbix log
 do
     echo "Atualizando pacotes e instalando wget no container " $maq
     lxc exec $maq -- /usr/bin/apt update
