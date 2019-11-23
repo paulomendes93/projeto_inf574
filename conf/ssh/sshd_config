@@ -24,6 +24,7 @@ PermitRootLogin no
 ClientAliveInterval 300
 ClientAliveCountMax 3
 
+#Default port
 Port 22
 
 # Disabling password authentication

@@ -76,5 +76,5 @@ lxc start zabbix
 echo "Aguardando 5 segundos para inicialização"
 sleep 5
 
-echo "Setando NAT entre redeDWDMZ e eth0"
+echo "NAT para que a redeDWDMZ tenha acesso a internet"
 lxc exec firewall -- iptables -t nat -A POSTROUTING --source 192.168.0.0/24 --out-interface eth0 -j MASQUERADE
